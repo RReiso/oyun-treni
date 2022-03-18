@@ -1,0 +1,25 @@
+@use "./variables.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+.sale {
+  color: $warning !important;
+  &:hover {
+    color: $secondary !important;
+  }
+}
+
+.navigation {
+  -webkit-box-shadow: 0px 4px 3px -3px rgba(0, 0, 0, 0.637);
+  box-shadow: 0px 4px 3px -3px rgba(0, 0, 0, 0.637);
+}
+
+.brand {
+  font-family: "Permanent Marker", cursive;
+  color: #eaece9 !important;
+}
+
+@media (min-width: 38em) {
+  .brand {
+    font-size: 2rem;
+  }
+}

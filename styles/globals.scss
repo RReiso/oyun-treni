@@ -1,12 +1,19 @@
+// $primary: #218a43;
+// $secondary: #c8afc3;
+// #b6c7cb
+@use "./variables.scss" as *;
+
 $theme-colors: (
-  "primary": #2d5092,
-  "secondary": #833bec,
+  "primary": $primary,
+  "secondary": $secondary,
   "success": #1ce1ac,
   "info": #ff7d50,
-  "warning": #ffbe0b,
+  "warning": $warning,
   "danger": #ff007f,
   "light": #c0ccda,
   "dark": #001738,
 );
+$navbar-dark-color: #effce8;
+$navbar-dark-hover-color: $secondary;
 
 @import "/node_modules/bootstrap/scss/bootstrap.scss";
