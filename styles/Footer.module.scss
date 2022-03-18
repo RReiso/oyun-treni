@@ -1,0 +1,20 @@
+@use "./variables.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+.footer {
+  margin-top: auto;
+  .brand {
+    font-family: "Permanent Marker", cursive;
+  }
+  color: $light;
+  background-color: $primary;
+  .creator {
+    font-size: 0.75rem;
+  }
+  .github {
+    color: $light;
+    &:hover {
+      color: $secondary;
+    }
+  }
+}

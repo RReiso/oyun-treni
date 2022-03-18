@@ -10,10 +10,11 @@ $theme-colors: (
   "info": #ff7d50,
   "warning": $warning,
   "danger": #ff007f,
-  "light": #c0ccda,
+  "light": #effce8,
   "dark": #001738,
 );
-$navbar-dark-color: #effce8;
+$navbar-dark-color: $light;
 $navbar-dark-hover-color: $secondary;
+$paragraph-margin-bottom: 0rem;
 
 @import "/node_modules/bootstrap/scss/bootstrap.scss";
