@@ -8,12 +8,12 @@ import styles from "../styles/Navbar.module.scss";
 const Navigation = () => {
   return (
     <Navbar
-      className={`px-2 ps-sm-4 pe-sm-5 py-3 ${styles.navigation}`}
+      className={`px-2 ps-sm-4 pe-sm-5 py-2 ${styles.navigation}`}
       bg="primary"
       variant="dark"
       expand="md"
     >
-      <Image src={"/images/train.png"} width="100px" height="60px" alt="tren" />
+      <Image src={"/images/train.png"} width="90px" height="60px" alt="tren" />
       <Navbar.Brand className={`ms-2 mx-sm-3 ${styles.brand}`} href="/">
         Oyun Treni
       </Navbar.Brand>

@@ -12,21 +12,16 @@ const Footer = () => {
         <p className="px-2">Istanbul, Turkiye</p>
       </div>
 
-      <div
-        className={`d-flex px-2 pt-2 justify-content-center ${styles.creator}`}
-      >
-        <p>Created by RReiso</p>
+      <div className={styles.creator}>
         <a
-          className="link px-2"
+          className={`px-2 d-flex px-2 pt-2 justify-content-center align-items-center ${styles.github}`}
           rel="noreferrer"
           href="https://github.com/rreiso"
           target="_blank"
         >
+          <p>Created by RReiso</p>
           <p className="sr-only">RReiso github.com profile</p>
-          <i
-            className={`fa fa-github fa-lg ${styles.github}`}
-            aria-hidden="true"
-          ></i>
+          <i className="fa fa-github fa-lg px-2" aria-hidden="true"></i>
         </a>
       </div>
     </footer>
