@@ -32,7 +32,7 @@ const Contact = () => {
           </Form.Group>
 
           <Button variant="info" type="submit">
-            Submit
+            Send message
           </Button>
         </Form>
       </Card>
