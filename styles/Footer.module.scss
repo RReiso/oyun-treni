@@ -3,11 +3,14 @@
 
 .footer {
   margin-top: auto;
+  color: $light;
+  background-color: $primary;
   .brand {
     font-family: "Permanent Marker", cursive;
   }
-  color: $light;
-  background-color: $primary;
+  .company {
+    text-align: center;
+  }
   .creator {
     font-size: 0.75rem;
   }

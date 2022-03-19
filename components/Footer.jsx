@@ -5,7 +5,9 @@ const Footer = () => {
   return (
     <footer className={`py-2 ${styles.footer}`}>
       <p className={`text-center ${styles.brand}`}>Oyun Treni</p>
-      <div className="d-flex justify-content-center">
+      <div
+        className={`d-sm-flex mx-sm-auto justify-content-center ${styles.company}`}
+      >
         <p className="px-2">
           <span>Telefon: </span>+ 345 295 3577
         </p>
