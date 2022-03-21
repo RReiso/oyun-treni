@@ -9,6 +9,7 @@ const Slider = () => {
       <Carousel variant="white" className={styles.slider}>
         <Carousel.Item>
           <Image
+            priority="true"
             layout="responsive"
             width="640px"
             height="427px"
