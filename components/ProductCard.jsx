@@ -1,5 +1,6 @@
+import Link from "next/link";
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const ProductCard = ({ product }) => {
   return (
@@ -9,9 +10,15 @@ const ProductCard = ({ product }) => {
         <Card.Title>{product.title}</Card.Title>
         <Card.Text className="my-2">{product.desc}</Card.Text>
         {product.price && <Card.Text>Price: {product.price}</Card.Text>}
-        <Button className="mt-3" variant="info">
-          Buy now
-        </Button>
+        {product.link ? (
+          <Link href={product.link}>
+            <a className=" btn btn-info mt-3">Buy</a>
+          </Link>
+        ) : (
+          <Link href="/contact">
+            <a className=" btn btn-info mt-3">Inquire</a>
+          </Link>
+        )}
       </Card.Body>
     </Card>
   );

@@ -6,7 +6,7 @@ import styles from "../styles/Slider.module.scss";
 const Slider = () => {
   return (
     <>
-      <Carousel variant="white" className={styles.slider}>
+      <Carousel variant="white" className={`mt-4 ${styles.slider}`}>
         <Carousel.Item>
           <Image
             priority="true"

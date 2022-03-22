@@ -1,23 +1,16 @@
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
-import { Button } from "react-bootstrap";
-import ProductCard from "../components/ProductCard";
+import AllProducts from "../components/AllProducts";
 import Slider from "../components/Slider";
-import styles from "../styles/Home.module.scss";
 
 export default function Home({ productList }) {
   return (
     <>
       <Slider />
-      <div className="mt-3 d-flex flex-wrap justify-content-center align-items-center">
-        {productList.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
+      <AllProducts productList={productList} />
       <div className="text-center mb-3">
         <Link href="/toys">
-          <a className=" btn btn-danger px-5">See more</a>
+          <a className=" btn btn-danger px-5 my-3">See more</a>
         </Link>
       </div>
     </>
