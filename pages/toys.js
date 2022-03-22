@@ -5,7 +5,9 @@ import AllProducts from "../components/AllProducts";
 const Toys = ({ productList }) => {
   return (
     <>
-      <h5 className="text-center mt-5 mx-2">Browse the variety of our toys!</h5>
+      <h4 className="fw-normal text-center mt-5 mx-2">
+        Browse the variety of our toys!
+      </h4>
       <AllProducts productList={productList} />;
     </>
   );

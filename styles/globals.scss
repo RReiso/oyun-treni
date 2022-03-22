@@ -11,7 +11,7 @@ $theme-colors: (
   "warning": $warning,
   "danger": $danger,
   "light": $light,
-  "dark": #001738,
+  "dark": $dark,
 );
 $navbar-dark-color: $light;
 $navbar-dark-hover-color: $secondary;
