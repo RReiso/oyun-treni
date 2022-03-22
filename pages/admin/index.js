@@ -1,12 +1,24 @@
 import axios from "axios";
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Button } from "react-bootstrap";
+import CreateModal from "../../components/CreateModal";
 import ProductDetails from "../../components/ProductDetails";
 
 const Index = ({ productList }) => {
+  const [modalShow, setModalShow] = useState(false);
+
   return (
     <>
       <h4 className="text-center mt-5">All items</h4>
+      <Button
+        className="mt-4 mx-auto d-flex"
+        variant="danger"
+        onClick={() => setModalShow(true)}
+      >
+        Add new item
+      </Button>
+
+      <CreateModal show={modalShow} onHide={() => setModalShow(false)} />
       <Card className="mb-5 mt-3 p-2 mx-auto" style={{ maxWidth: "35rem" }}>
         {productList.map((product) => (
           <ProductDetails key={product._id} product={product} />
