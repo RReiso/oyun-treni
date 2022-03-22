@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import EditModal from "./EditModal";
 import styles from "../styles/ProductDetails.module.scss";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product, handleDelete }) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -31,6 +31,7 @@ const ProductDetails = ({ product }) => {
       </Button>
 
       <EditModal
+        handleDelete={handleDelete}
         show={modalShow}
         product={product}
         onHide={() => setModalShow(false)}

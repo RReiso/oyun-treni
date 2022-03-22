@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-function EditModal({ show, onHide, product }) {
+function EditModal({ show, onHide, product, handleDelete }) {
   const [productDetails, setProductDetails] = useState({
     title: product.title,
     desc: product.desc,
@@ -81,7 +82,15 @@ function EditModal({ show, onHide, product }) {
             />
           </Form.Group>
 
-          <Button className="btn-sm" variant="info" type="submit">
+          <Button
+            className="btn-sm me-2"
+            variant="danger"
+            type="submit"
+            onClick={() => handleDelete(product._id)}
+          >
+            Delete item
+          </Button>
+          <Button className="btn-sm " variant="info" type="submit">
             Save
           </Button>
         </Form>

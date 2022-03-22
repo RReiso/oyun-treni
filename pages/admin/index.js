@@ -7,6 +7,14 @@ import ProductDetails from "../../components/ProductDetails";
 const Index = ({ productList }) => {
   const [modalShow, setModalShow] = useState(false);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/api/products/${id}`);
+    } catch (error) {
+      console.log("error :>> ", error.message);
+    }
+  };
+
   return (
     <>
       <h4 className="text-center mt-5">All items</h4>
@@ -21,7 +29,11 @@ const Index = ({ productList }) => {
       <CreateModal show={modalShow} onHide={() => setModalShow(false)} />
       <Card className="mb-5 mt-3 p-2 mx-auto" style={{ maxWidth: "35rem" }}>
         {productList.map((product) => (
-          <ProductDetails key={product._id} product={product} />
+          <ProductDetails
+            handleDelete={handleDelete}
+            key={product._id}
+            product={product}
+          />
         ))}
       </Card>
     </>
