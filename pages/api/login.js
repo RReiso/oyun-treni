@@ -1,19 +1,20 @@
 import cookie from "cookie";
 
 const handler = (req, res) => {
-  if (req.metod === "POST") {
-    const { username, password } = req.body;
+  if (req.method === "POST") {
+    console.log("first");
+    const { email, password } = req.body;
     if (
-      username === process.env.USERNAME &&
-      password === process.env.PASSWORD
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
     ) {
-      res.setHeaders(
+      res.setHeader(
         "Set-Cookie",
         cookie.serialize("token", process.env.TOKEN, {
           maxAge: 60 * 60 * 24,
           sameSite: "strict",
           path: "/",
-          httpOnly,
+          httpOnly: true,
         })
       );
       res.status(200).json("Successful");
