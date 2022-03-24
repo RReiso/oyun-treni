@@ -2,7 +2,6 @@ import cookie from "cookie";
 
 const handler = (req, res) => {
   if (req.method === "POST") {
-    console.log("first");
     const { email, password } = req.body;
     if (
       email === process.env.ADMIN_EMAIL &&

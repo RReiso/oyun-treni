@@ -42,6 +42,7 @@ const Login = () => {
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
+              autoComplete="password"
               type="password"
               placeholder="Password"
               required
@@ -67,3 +68,18 @@ const Login = () => {
 };
 
 export default Login;
+
+export const getServerSideProps = async (context) => {
+  const adminCookie = context.req?.cookies || "";
+
+  if (adminCookie.token === process.env.TOKEN) {
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+  } else {
+    return null;
+  }
+};
