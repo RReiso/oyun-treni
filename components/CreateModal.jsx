@@ -4,26 +4,40 @@ import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function CreateModal({ setError, show, onHide }) {
+  const [file, setFile] = useState(null);
   const [productDetails, setProductDetails] = useState({
     title: "",
     desc: "",
     price: 0,
-    file: null,
+    img: "",
     productLink: "",
   });
 
   const router = useRouter();
 
   const handleClick = async (e) => {
-    console.log("productDetails :>> ", productDetails);
     e.preventDefault();
+    console.log(process.env.NEXT_PUBLIC_CLOUDINARY_URL);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    );
     try {
+      const uploadResult = await axios.post(
+        process.env.NEXT_PUBLIC_CLOUDINARY_URL,
+        formData
+      );
+      productDetails.img = uploadResult.data.url;
       await axios.post("/api/products", productDetails);
       setError(false);
+      onHide();
       router.push("/admin");
     } catch (error) {
       console.log("error.message :>> ", error.message);
       setError(true);
+      onHide();
     }
   };
 
@@ -74,10 +88,7 @@ function CreateModal({ setError, show, onHide }) {
               name="img"
               required
               onChange={(e) => {
-                setProductDetails({
-                  ...productDetails,
-                  file: e.target.files[0],
-                });
+                setFile(e.target.files[0]);
               }}
             />
           </Form.Group>

@@ -22,9 +22,8 @@ export default async function handler(req, res) {
       return res.status(401).json("Not authenticated!");
     }
     try {
-      // const product = await Product.create(req.body);
-      console.log("rq.body", req.body);
-      // res.status(201).json(product);
+      const product = await Product.create(req.body);
+      res.status(201).json(product);
     } catch (error) {
       res.status(500).json(error.message);
     }
