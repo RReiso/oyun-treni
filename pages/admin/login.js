@@ -80,6 +80,8 @@ export const getServerSideProps = async (context) => {
       },
     };
   } else {
-    return null;
+    return {
+      props: {},
+    };
   }
 };

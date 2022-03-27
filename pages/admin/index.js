@@ -6,6 +6,7 @@ import CreateModal from "../../components/CreateModal";
 import ProductDetails from "../../components/ProductDetails";
 
 const Index = ({ productList, error, admin }) => {
+  const [createError, setCreateError] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const router = useRouter();
 
@@ -28,6 +29,7 @@ const Index = ({ productList, error, admin }) => {
 
   return (
     <>
+      {createError && <div>Error creating item!</div>}
       {admin && (
         <Button
           className="mt-4 ms-auto d-flex mx-3"
@@ -50,7 +52,11 @@ const Index = ({ productList, error, admin }) => {
             Add new item
           </Button>
 
-          <CreateModal show={modalShow} onHide={() => setModalShow(false)} />
+          <CreateModal
+            setError={setCreateError}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
           <Card className="mb-5 mt-3 p-2 mx-auto" style={{ maxWidth: "35rem" }}>
             {productList.map((product) => (
               <ProductDetails

@@ -1,14 +1,31 @@
+import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-function CreateModal({ show, onHide }) {
+function CreateModal({ setError, show, onHide }) {
   const [productDetails, setProductDetails] = useState({
     title: "",
     desc: "",
     price: 0,
-    imgLink: "",
+    file: null,
     productLink: "",
   });
+
+  const router = useRouter();
+
+  const handleClick = async (e) => {
+    console.log("productDetails :>> ", productDetails);
+    e.preventDefault();
+    try {
+      await axios.post("/api/products", productDetails);
+      setError(false);
+      router.push("/admin");
+    } catch (error) {
+      console.log("error.message :>> ", error.message);
+      setError(true);
+    }
+  };
 
   return (
     <Modal
@@ -19,7 +36,7 @@ function CreateModal({ show, onHide }) {
       centered
     >
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleClick}>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
             <Form.Control
@@ -51,6 +68,20 @@ function CreateModal({ show, onHide }) {
             />
           </Form.Group>
           <Form.Group className="mb-3">
+            <Form.Label>Chose an image</Form.Label>
+            <Form.Control
+              type="file"
+              name="img"
+              required
+              onChange={(e) => {
+                setProductDetails({
+                  ...productDetails,
+                  file: e.target.files[0],
+                });
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
@@ -70,7 +101,7 @@ function CreateModal({ show, onHide }) {
             <Form.Label>Link to product</Form.Label>
             <Form.Control
               type="text"
-              name="productLink"
+              name="link"
               value={productDetails.link}
               onChange={(e) => {
                 setProductDetails({
