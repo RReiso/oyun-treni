@@ -10,33 +10,61 @@ function CreateModal({ setError, show, onHide }) {
     desc: "",
     price: 0,
     img: "",
-    productLink: "",
+    link: "",
   });
 
   const router = useRouter();
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append(
-      "upload_preset",
-      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-    );
-    try {
-      const uploadResult = await axios.post(
-        process.env.NEXT_PUBLIC_CLOUDINARY_URL,
-        formData
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append(
+        "upload_preset",
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
       );
-      productDetails.img = uploadResult.data.url;
-      await axios.post("/api/products", productDetails);
-      setError(false);
-      onHide();
-      router.push("/admin");
-    } catch (error) {
-      console.log("error.message :>> ", error.message);
-      setError(true);
-      onHide();
+      try {
+        const uploadResult = await axios.post(
+          process.env.NEXT_PUBLIC_CLOUDINARY_URL,
+          formData
+        );
+        productDetails.img = uploadResult.data.url;
+        await axios.post("/api/products", productDetails);
+        setProductDetails({
+          title: "",
+          desc: "",
+          price: 0,
+          img: "",
+          link: "",
+        });
+        setError(false);
+        onHide();
+        router.push("/admin");
+      } catch (error) {
+        console.log("error.message :>> ", error.message);
+        setError(true);
+        onHide();
+      }
+    } else {
+      try {
+        await axios.post("/api/products", productDetails);
+        setProductDetails({
+          title: "",
+          desc: "",
+          price: 0,
+          img: "",
+          link: "",
+        });
+        setError(false);
+        onHide();
+        router.push("/admin");
+      } catch (error) {
+        console.log("error.message :>> ", error.message);
+        setError(true);
+        onHide();
+      }
     }
   };
 
@@ -68,7 +96,8 @@ function CreateModal({ setError, show, onHide }) {
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
+              rows={3}
               value={productDetails.desc}
               name="desc"
               required
@@ -80,17 +109,37 @@ function CreateModal({ setError, show, onHide }) {
               }}
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Chose an image</Form.Label>
-            <Form.Control
-              type="file"
-              name="img"
-              required
-              onChange={(e) => {
-                setFile(e.target.files[0]);
-              }}
-            />
-          </Form.Group>
+          <p className="alert alert-info text-center">
+            Paste an image link starting with
+            &apos;https://productimages.hepsiburada.net&apos; OR upload your
+            image!
+          </p>
+          <div className="d-sm-flex">
+            <Form.Group className="mb-3 me-1">
+              <Form.Label>Link to Image</Form.Label>
+              <Form.Control
+                type="text"
+                value={productDetails.img}
+                name="img"
+                onChange={(e) => {
+                  setProductDetails({
+                    ...productDetails,
+                    img: e.target.value,
+                  });
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Chose an image</Form.Label>
+              <Form.Control
+                type="file"
+                name="img"
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                }}
+              />
+            </Form.Group>
+          </div>
           <Form.Group className="mb-3">
             <Form.Label>Price</Form.Label>
             <Form.Control
@@ -116,7 +165,7 @@ function CreateModal({ setError, show, onHide }) {
               onChange={(e) => {
                 setProductDetails({
                   ...productDetails,
-                  productLink: e.target.value,
+                  link: e.target.value,
                 });
               }}
             />

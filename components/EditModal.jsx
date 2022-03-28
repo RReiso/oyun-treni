@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import checkType from "../utils/checkImageType";
 
 function EditModal({ show, onHide, product, setError }) {
   const router = useRouter();
@@ -11,7 +12,7 @@ function EditModal({ show, onHide, product, setError }) {
     desc: product.desc,
     price: product.price || 0,
     img: product.img,
-    productLink: product.link || "",
+    link: product.link || "",
   });
 
   const handleDelete = async (e, id) => {
@@ -52,7 +53,7 @@ function EditModal({ show, onHide, product, setError }) {
     >
       <Modal.Body>
         <Image
-          src={productDetails.img}
+          src={checkType(productDetails.img)}
           width="90px"
           height="60px"
           alt={productDetails.title}
@@ -77,7 +78,8 @@ function EditModal({ show, onHide, product, setError }) {
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
+              rows={3}
               value={productDetails.desc}
               name="desc"
               required
@@ -109,12 +111,12 @@ function EditModal({ show, onHide, product, setError }) {
             <Form.Label>Link to product</Form.Label>
             <Form.Control
               type="text"
-              name="productLink"
+              name="link"
               value={productDetails.link}
               onChange={(e) => {
                 setProductDetails({
                   ...productDetails,
-                  productLink: e.target.value,
+                  link: e.target.value,
                 });
               }}
             />

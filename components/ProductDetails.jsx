@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import EditModal from "./EditModal";
+import checkType from "../utils/checkImageType";
 
 const ProductDetails = ({ product, setError }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -13,8 +14,8 @@ const ProductDetails = ({ product, setError }) => {
           layout="intrinsic"
           width={200}
           height={150}
-          src={product.img}
-          alt="First slide"
+          src={checkType(product.img)}
+          alt={product.title}
         />
       </div>
       <div className="d-sm-flex justify-content-between">

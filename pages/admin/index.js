@@ -34,9 +34,9 @@ const Index = ({ productList, error, admin }) => {
         <div
           className="alert alert-danger text-center mx-auto mt-5"
           role="alert"
-          style={{ maxWidth: "15rem" }}
+          style={{ maxWidth: "20rem" }}
         >
-          Error updating item!
+          Error creating or updating item!
         </div>
       )}
       {error ? (
