@@ -20,7 +20,9 @@ const ProductDetails = ({ product, setError }) => {
       </div>
       <div className="d-sm-flex justify-content-between">
         <p className="fw-bold ps-sm-4 pe-sm-2 mx-2">{product.title}</p>
-        {product.price > 0 && <p className="px-sm-2 mx-2">₺ {product.price}</p>}
+        {product.price > 0 && (
+          <p className="px-sm-2 mx-2">₺ {Number(product.price).toFixed(2)}</p>
+        )}
       </div>
       <Button
         className="m-1 ms-sm-auto"

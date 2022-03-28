@@ -9,10 +9,14 @@ const ProductCard = ({ product }) => {
       <Card.Body>
         <Card.Title>{product.title}</Card.Title>
         <Card.Text className="my-2">{product.desc}</Card.Text>
-        {product.price > 0 && <Card.Text>Price: ₺{product.price}</Card.Text>}
+        {product.price > 0 && (
+          <Card.Text>Price: ₺{Number(product.price).toFixed(2)}</Card.Text>
+        )}
         {product.link ? (
           <Link href={product.link}>
-            <a className=" btn btn-info mt-3">Buy</a>
+            <a className=" btn btn-info mt-3" target="_blank" rel="noreferrer">
+              Buy
+            </a>
           </Link>
         ) : (
           <Link href="/contact">

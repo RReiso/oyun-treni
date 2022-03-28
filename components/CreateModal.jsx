@@ -110,9 +110,8 @@ function CreateModal({ setError, show, onHide }) {
             />
           </Form.Group>
           <p className="alert alert-info text-center">
-            Paste an image link starting with
-            &apos;https://productimages.hepsiburada.net&apos; OR upload your
-            image!
+            Paste an image link starting with &apos;https://productimages.
+            hepsiburada.net&apos; OR upload your image!
           </p>
           <div className="d-sm-flex">
             <Form.Group className="mb-3 me-1">
