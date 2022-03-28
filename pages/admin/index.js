@@ -40,7 +40,14 @@ const Index = ({ productList, error, admin }) => {
         </div>
       )}
       {error ? (
-        <div>Error loading items</div>
+        <div
+          className="alert alert-danger text-center mx-auto mt-5"
+          role="alert"
+          style={{ maxWidth: "15rem" }}
+        >
+          {console.log(error)}
+          Error loading items
+        </div>
       ) : (
         <>
           <h4 className="text-center mt-5">All items</h4>
@@ -87,7 +94,9 @@ export const getServerSideProps = async (context) => {
   }
 
   try {
-    const res = await axios.get("http://localhost:3000/api/products");
+    const res = await axios.get(
+      `http://${context.req.headers.host}/api/products`
+    );
     return {
       props: {
         productList: res.data,

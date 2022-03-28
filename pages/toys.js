@@ -21,9 +21,11 @@ const Toys = ({ productList, error }) => {
 
 export default Toys;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   try {
-    const res = await axios.get("http://localhost:3000/api/products");
+    const res = await axios.get(
+      `http://${context.req.headers.host}/api/products`
+    );
     return {
       props: {
         productList: res.data,

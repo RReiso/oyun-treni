@@ -23,8 +23,10 @@ export default function Home({ productList, error }) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/products");
+export const getServerSideProps = async (context) => {
+  const res = await axios.get(
+    `http://${context.req.headers.host}/api/products`
+  );
   const sampleProducts = [];
   try {
     for (let i = 0; i < 6; i++) {
