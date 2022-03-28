@@ -17,7 +17,6 @@ function CreateModal({ setError, show, onHide }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(process.env.NEXT_PUBLIC_CLOUDINARY_URL);
     const formData = new FormData();
     formData.append("file", file);
     formData.append(

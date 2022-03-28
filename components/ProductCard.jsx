@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
       <Card.Body>
         <Card.Title>{product.title}</Card.Title>
         <Card.Text className="my-2">{product.desc}</Card.Text>
-        {product.price && <Card.Text>Price: {product.price}</Card.Text>}
+        {product.price > 0 && <Card.Text>Price: {product.price}</Card.Text>}
         {product.link ? (
           <Link href={product.link}>
             <a className=" btn btn-info mt-3">Buy</a>

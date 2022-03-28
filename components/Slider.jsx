@@ -55,12 +55,6 @@ const Slider = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      {/* <Image
-        layout="fill"
-        // className="d-block w-100"
-        src="/images/train.png"
-        alt="Third slide"
-      /> */}
     </>
   );
 };

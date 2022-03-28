@@ -6,17 +6,9 @@ import CreateModal from "../../components/CreateModal";
 import ProductDetails from "../../components/ProductDetails";
 
 const Index = ({ productList, error, admin }) => {
-  const [createError, setCreateError] = useState(false);
+  const [updateError, setUpdateError] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const router = useRouter();
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`/api/products/${id}`);
-    } catch (error) {
-      console.log("error :>> ", error.message);
-    }
-  };
 
   const handleLogout = async () => {
     try {
@@ -29,7 +21,6 @@ const Index = ({ productList, error, admin }) => {
 
   return (
     <>
-      {createError && <div>Error creating item!</div>}
       {admin && (
         <Button
           className="mt-4 ms-auto d-flex mx-3"
@@ -38,6 +29,15 @@ const Index = ({ productList, error, admin }) => {
         >
           Log out
         </Button>
+      )}
+      {updateError && (
+        <div
+          className="alert alert-danger text-center mx-auto mt-5"
+          role="alert"
+          style={{ maxWidth: "15rem" }}
+        >
+          Error updating item!
+        </div>
       )}
       {error ? (
         <div>Error loading items</div>
@@ -53,14 +53,14 @@ const Index = ({ productList, error, admin }) => {
           </Button>
 
           <CreateModal
-            setError={setCreateError}
+            setError={setUpdateError}
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
           <Card className="mb-5 mt-3 p-2 mx-auto" style={{ maxWidth: "35rem" }}>
             {productList.map((product) => (
               <ProductDetails
-                handleDelete={handleDelete}
+                setError={setUpdateError}
                 key={product._id}
                 product={product}
               />

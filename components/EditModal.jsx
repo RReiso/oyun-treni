@@ -1,15 +1,46 @@
 import axios from "axios";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-function EditModal({ show, onHide, product, handleDelete }) {
+function EditModal({ show, onHide, product, setError }) {
+  const router = useRouter();
   const [productDetails, setProductDetails] = useState({
     title: product.title,
     desc: product.desc,
     price: product.price || 0,
-    imgLink: product.image,
+    img: product.img,
     productLink: product.link || "",
   });
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+    try {
+      await axios.delete(`/api/products/${id}`);
+      setError(false);
+      onHide();
+      router.push("/admin");
+    } catch (error) {
+      console.log("error :>> ", error.message);
+      setError(true);
+      onHide();
+    }
+  };
+
+  const handleSave = async (e, id) => {
+    e.preventDefault();
+    try {
+      await axios.put(`/api/products/${id}`, productDetails);
+      setError(false);
+      onHide();
+      router.push("/admin");
+    } catch (error) {
+      console.log("error :>> ", error.message);
+      setError(true);
+      onHide();
+    }
+  };
 
   return (
     <Modal
@@ -20,6 +51,13 @@ function EditModal({ show, onHide, product, handleDelete }) {
       centered
     >
       <Modal.Body>
+        <Image
+          src={productDetails.img}
+          width="90px"
+          height="60px"
+          alt={productDetails.title}
+        />
+
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
@@ -86,11 +124,16 @@ function EditModal({ show, onHide, product, handleDelete }) {
             className="btn-sm me-2"
             variant="danger"
             type="submit"
-            onClick={() => handleDelete(product._id)}
+            onClick={(e) => handleDelete(e, product._id)}
           >
             Delete item
           </Button>
-          <Button className="btn-sm " variant="info" type="submit">
+          <Button
+            className="btn-sm "
+            variant="info"
+            type="submit"
+            onClick={(e) => handleSave(e, product._id)}
+          >
             Save
           </Button>
         </Form>

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import EditModal from "./EditModal";
-import styles from "../styles/ProductDetails.module.scss";
 
-const ProductDetails = ({ product, handleDelete }) => {
+const ProductDetails = ({ product, setError }) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -31,7 +30,7 @@ const ProductDetails = ({ product, handleDelete }) => {
       </Button>
 
       <EditModal
-        handleDelete={handleDelete}
+        setError={setError}
         show={modalShow}
         product={product}
         onHide={() => setModalShow(false)}
