@@ -26,6 +26,15 @@ function CreateModal({ setError, show, onHide }) {
         process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
       );
       try {
+        if (
+          file.type !== "image/png" &&
+          file.type !== "image/jpeg" &&
+          file.type !== "image/jpg"
+        ) {
+          setError(true);
+          throw new Error("Wrong file type");
+        }
+
         const uploadResult = await axios.post(
           process.env.NEXT_PUBLIC_CLOUDINARY_URL,
           formData
@@ -43,7 +52,7 @@ function CreateModal({ setError, show, onHide }) {
         onHide();
         router.push("/admin");
       } catch (error) {
-        console.log("error.message :>> ", error.message);
+        console.error("error.message :>> ", error.message);
         setError(true);
         onHide();
       }
@@ -61,7 +70,7 @@ function CreateModal({ setError, show, onHide }) {
         onHide();
         router.push("/admin");
       } catch (error) {
-        console.log("error.message :>> ", error.message);
+        console.error("error.message :>> ", error.message);
         setError(true);
         onHide();
       }
