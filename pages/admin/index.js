@@ -36,7 +36,7 @@ const Index = ({ productList, error, admin }) => {
           role="alert"
           style={{ maxWidth: "20rem" }}
         >
-          Error creating or updating item!
+          Error occured. Try again later!
         </div>
       )}
       {error ? (
