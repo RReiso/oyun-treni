@@ -99,7 +99,7 @@ export const getServerSideProps = async (context) => {
     );
     return {
       props: {
-        productList: res.data,
+        productList: res.data.reverse(),
         admin: true,
       },
     };

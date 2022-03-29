@@ -50,6 +50,7 @@ function CreateModal({ setError, show, onHide }) {
           img: "",
           link: "",
         });
+        setFile(null);
         setError(false);
         setIsLoading(false);
         onHide();
@@ -70,6 +71,7 @@ function CreateModal({ setError, show, onHide }) {
           img: "",
           link: "",
         });
+        setFile(null);
         setError(false);
         setIsLoading(false);
         onHide();

@@ -1,11 +1,16 @@
 import Link from "next/link";
 import React from "react";
 import { Card } from "react-bootstrap";
+import checkType from "../utils/checkImageType";
 
 const ProductCard = ({ product }) => {
   return (
     <Card className="m-3" style={{ maxWidth: "20rem" }}>
-      <Card.Img variant="top" src={product.img} />
+      <Card.Img
+        variant="top"
+        src={checkType(product.img)}
+        alt={product.title}
+      />
       <Card.Body>
         <Card.Title>{product.title}</Card.Title>
         <Card.Text className="my-2">{product.desc}</Card.Text>

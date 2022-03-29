@@ -42,6 +42,7 @@ export default async function handler(req, res) {
       return res.status(401).json("Not authenticated!");
     }
     try {
+      // delete image from cloudinary
       let cloudinary = require("cloudinary").v2;
 
       cloudinary.config({
@@ -51,14 +52,17 @@ export default async function handler(req, res) {
       });
 
       const product = await Product.findById(id);
-      let imgCloudinaryID = product.img.match(/alitoys(.*?)\./)[0];
-      imgCloudinaryID = imgCloudinaryID.substring(
-        0,
-        imgCloudinaryID.length - 1
-      );
+      let imgCloudinaryID = product.img.match(/alitoys(.*?)\./);
+      if (imgCloudinaryID) {
+        imgCloudinaryID = imgCloudinaryID[0].substring(
+          0,
+          imgCloudinaryID[0].length - 1
+        );
 
-      cloudinary.uploader.destroy(imgCloudinaryID);
+        cloudinary.uploader.destroy(imgCloudinaryID);
+      }
 
+      //delete product from db
       await Product.findByIdAndDelete(id);
       res.status(200).json("The product has been deleted!");
     } catch (error) {
