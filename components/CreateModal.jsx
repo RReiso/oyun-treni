@@ -5,6 +5,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 
 function CreateModal({ setError, show, onHide }) {
   const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [productDetails, setProductDetails] = useState({
     title: "",
     desc: "",
@@ -17,6 +18,7 @@ function CreateModal({ setError, show, onHide }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (file) {
       const formData = new FormData();
@@ -49,11 +51,13 @@ function CreateModal({ setError, show, onHide }) {
           link: "",
         });
         setError(false);
+        setIsLoading(false);
         onHide();
         router.push("/admin");
       } catch (error) {
         console.error("error.message :>> ", error.message);
         setError(true);
+        setIsLoading(false);
         onHide();
       }
     } else {
@@ -67,11 +71,13 @@ function CreateModal({ setError, show, onHide }) {
           link: "",
         });
         setError(false);
+        setIsLoading(false);
         onHide();
         router.push("/admin");
       } catch (error) {
         console.error("error.message :>> ", error.message);
         setError(true);
+        setIsLoading(false);
         onHide();
       }
     }
@@ -179,9 +185,15 @@ function CreateModal({ setError, show, onHide }) {
             />
           </Form.Group>
 
-          <Button className="btn-sm" variant="info" type="submit">
-            Create item
-          </Button>
+          {isLoading ? (
+            <Button className="btn-sm" variant="info" type="submit" disabled>
+              Loading, please wait...
+            </Button>
+          ) : (
+            <Button className="btn-sm" variant="info" type="submit">
+              Create item
+            </Button>
+          )}
         </Form>
       </Modal.Body>
       <Modal.Footer>
