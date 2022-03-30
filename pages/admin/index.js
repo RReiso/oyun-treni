@@ -32,11 +32,18 @@ const Index = ({ productList, error, admin }) => {
       )}
       {updateError && (
         <div
-          className="alert alert-danger text-center mx-auto mt-5"
+          className="alert alert-danger text-center mx-auto mt-5 alert-dismissible fade show"
           role="alert"
           style={{ maxWidth: "20rem" }}
         >
           Error occured. Try again later!
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+            onClick={() => setUpdateError(false)}
+          ></button>
         </div>
       )}
       {error ? (

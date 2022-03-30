@@ -7,6 +7,7 @@ import checkType from "../utils/checkImageType";
 
 function EditModal({ show, onHide, product, setError }) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [productDetails, setProductDetails] = useState({
     title: product.title,
     desc: product.desc,
@@ -17,14 +18,17 @@ function EditModal({ show, onHide, product, setError }) {
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       await axios.delete(`/api/products/${id}`);
       setError(false);
+      setIsLoading(false);
       onHide();
       router.push("/admin");
     } catch (error) {
       console.log("error :>> ", error.message);
       setError(true);
+      setIsLoading(false);
       onHide();
     }
   };
@@ -121,15 +125,24 @@ function EditModal({ show, onHide, product, setError }) {
               }}
             />
           </Form.Group>
-
-          <Button
-            className="btn-sm me-2"
-            variant="danger"
-            type="submit"
-            onClick={(e) => handleDelete(e, product._id)}
-          >
-            Delete item
-          </Button>
+          {isLoading ? (
+            <Button
+              className="btn-sm me-2 disabled"
+              variant="danger"
+              type="submit"
+            >
+              Deleting, please wait..
+            </Button>
+          ) : (
+            <Button
+              className="btn-sm me-2"
+              variant="danger"
+              type="submit"
+              onClick={(e) => handleDelete(e, product._id)}
+            >
+              Delete item
+            </Button>
+          )}
           <Button
             className="btn-sm "
             variant="info"

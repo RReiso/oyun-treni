@@ -78,6 +78,14 @@ function CreateModal({ setError, show, onHide }) {
         router.push("/admin");
       } catch (error) {
         console.error("error.message :>> ", error.message);
+        setProductDetails({
+          title: "",
+          desc: "",
+          price: 0,
+          img: "",
+          link: "",
+        });
+        setFile(null);
         setError(true);
         setIsLoading(false);
         onHide();
